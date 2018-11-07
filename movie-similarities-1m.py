@@ -1,3 +1,11 @@
+"""
+The default partitioning isn't always the best - perhaps you want to hand-tune 
+the performance of the job, or you might want to force things into a single partition 
+at the end in order to avoid having your final results spread out over multiple output 
+files. 
+You can read more on partitioning at: 
+https://jaceklaskowski.gitbooks.io/mastering-apache-spark/spark-rdd-partitions.html
+"""
 import sys
 from pyspark import SparkConf, SparkContext
 from math import sqrt
