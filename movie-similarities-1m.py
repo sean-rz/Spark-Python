@@ -65,6 +65,15 @@ joinedRatings = ratingsPartitioned.join(ratingsPartitioned)
 # Filter out duplicate pairs
 uniqueJoinedRatings = joinedRatings.filter(filterDuplicates)
 
+'''
+Each RDD inside Spark cluster  consists of 1 or more partition (smaller chunks).
+Filter causes partitions to become sparse, that is why it is better to re-partition 
+after filter as well.
+So we are trying to re-parallelize the map output and reorder it based on how close 
+data are to each other physically on cluster executor nodes. 
+The number 100 is not fixed , it can depend on the data volume and the cluster size, 
+this is part of optimizing Spark programs.
+'''
 # Now key by (movie1, movie2) pairs.
 moviePairs = uniqueJoinedRatings.map(makePairs).partitionBy(100)
 
