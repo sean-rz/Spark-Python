@@ -13,6 +13,7 @@ def loadMovieNames():
 conf = SparkConf().setMaster("local[*]").setAppName("MovieRecommendationsALS")
 sc = SparkContext(conf = conf)
 sc.setCheckpointDir('checkpoint')
+# https://github.com/JerryLead/SparkInternals/blob/master/markdown/english/6-CacheAndCheckpoint.md
 
 print("\nLoading movie names...")
 nameDict = loadMovieNames()
